@@ -1,71 +1,71 @@
-#include “stdafx.h”
+#include â€œstdafx.hâ€
 void ekle(int);
 void listele();
-void çıkar();
+void cikar();
 int lara(int);
 void ara(int, int);
-//fonksiyon tanımlamaları
+//Functions
 
-int from = 1;//başlangıç düğümü
-int to = 3;// bitiş düğümü
+int from = 1;//stater node
+int to = 3;// target node
 
-const int boy = 4;// varsayılan boy
-int dizi[boy][boy] = { 0 };// oluşturulan matrisi 0 lıyoruz
-struct stack{// gidilen yolu tutmak için stack yapısı kullanıyoruz
+const int boy = 4;// lenght
+int dizi[boy][boy] = { 0 };// reset matrix
+struct stack{// use stack for path
 int top=-1;
 int info[boy];
 }s;
-void ekle(int x){// stacaka item ekleme
+void ekle(int x){//push stack
 if (s.top < boy){
 s.top++;
 s.info[s.top] = x;
 }
 }
-void listele(){//stacktaki yolları yazdırma
+void listele(){//print stack
 for (int i = 0; i <= s.top; i++){
-printf(“%d”, s.info[i]+1);
+printf(â€œ%dâ€, s.info[i]+1);
 }
 }
-void çıkar(){//stacktan item çıkarma
-s.top–;
+void cikar(){//pop stack
+s.topâ€“;
 }
-int lara(int x){//stackta item arama
+int lara(int x){//item search on stack
 for (int i = 0; i <= s.top; i++){
 if (s.info[i] == x)
 return 1;
 }
 return 0;
 }
-void ara(int x, int y){//matriste yol arama fonksiyonu recursive
-ekle(x);//girilen yolu stacka ekleme
+void ara(int x, int y){//patch finder recursive
+ekle(x);//push stack at point
 int c;
-for (int i = 0; i < boy; i++){//yolları arama
-c = lara(i);//gidilcek yeri stackta arama
-if (dizi[x][i] == 1 && c == 0 && i!=y){//yeni yere gidilebilirmi daha önce gidildimi asıl hedefmi kontrolü yapıyoruz
+for (int i = 0; i < boy; i++){//
+c = lara(i);//check patch s point
+if (dizi[x][i] == 1 && c == 0 && i!=y){//can go new point
 ara(i, y);
 }
-if (i == y && dizi[x][y] == 1){// asıl hedefmi ve geldiğimiz yerden asıl hedefe bağlantı varmı kontrolü
-listele();// gelinen yolu yazdır
-printf_s(“%d\n”, i+1);// olduğumuz yeri yazdır
+if (i == y && dizi[x][y] == 1){// check can go target or at target
+listele();// print path
+printf_s(â€œ%d\nâ€, i+1);// print point
 
 }
 
 }
 
-çıkar();// girilen yerden çık
+cikar();// pop stack
 
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-for (int i = 0; i < boy; i++)// temsili matrix doldurma
+for (int i = 0; i < boy; i++)// initial matrix
 for (int j = 0; j < boy; j++)
 if (i != j)
 dizi[i][j] = 1;
 
-ara(from – 1, to – 1);// matrixler 0 dan başladığı için -1 kullanıyoruz
+ara(from â€“ 1, to â€“ 1);// 
 int x;
-scanf_s(“%d”, &x);//ekran kapanmasın
+scanf_s(â€œ%dâ€, &x);//wait cursor
 return 0;
 }
